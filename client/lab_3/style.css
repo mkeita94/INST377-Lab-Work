@@ -200,7 +200,7 @@ form {
 /* Carousel */
 div.carousel {
   max-width: 300px;
-  overflow: hidden;
+  overflow:hidden;
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -259,9 +259,11 @@ div.carousel {
 .next:focus {
   margin: 0;
   /* Pick a good border colour and check out how it works with your buttons */
+border-color: palevioletred;
 }
 
 .prev:hover,
 .next:hover {
   /* Pick a good background colour for your hover pseudoclass */
+  background-color: aliceblue;
 }
