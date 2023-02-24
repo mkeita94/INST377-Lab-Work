@@ -66,8 +66,9 @@ form {
 }
 
 .container {
-  margin: 0 20px;
+  
   display: flex;
+  margin: 0 20px;
   justify-content: space-evenly;
   align-items: flex-start;
   flex:1;
@@ -80,8 +81,6 @@ form {
   padding-bottom: 1.5rem;
   
 }
-
-
 /*
   This rule implies that the H1 tag lives within another HTML tag
   It "inherits" some rules from the above
@@ -102,12 +101,9 @@ form {
   padding: 1.25rem;
   margin:0; /* removing the margin on h1 tags means the header pins to the top if we move */
 
-
-  /* box-shadows are fancy */
+/* box-shadows are fancy */
   box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
-  
 }
-
 
 /*
   Rules can be combined on a block to apply the 'cascade' in order
@@ -128,11 +124,11 @@ form {
   margin: 0 auto;
   color: blue;
 }
-
 .left_section {
   flex: 0 1 auto;
   margin: 1rem;
   padding: 1.5rem;
+  flex-shrink: 0;
 }
 
 .right_section {
