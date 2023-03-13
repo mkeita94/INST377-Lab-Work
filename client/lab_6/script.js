@@ -13,7 +13,7 @@ function injectHTML(list){
   const target = document.querySelector('#restaurants_list')
   target.innerHTML = ''
   list.forEach((item) =>{
-    const str = `<li>${item.name}<li>`
+    const str = `<li>${item.name}</li>`
     target.innerHTML += str
   })
 }
