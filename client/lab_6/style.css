@@ -233,6 +233,11 @@ form input {
   justify-content: space-between;
 }
 
+/*Fix indentation problem*/
+#restaurants_list li{
+  margin-left: 15px;
+}
+
 
 .lds-ellipsis {
     display: inline-block;
