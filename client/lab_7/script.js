@@ -18,14 +18,22 @@ function injectHTML(list) {
   });
 }
 
+function filterList(array, filterInputValue) {
+  return array.filter((item) => {
+    const lowerCaseName = item.name.toLowerCase();
+    const lowerCaseQuery = filterInputValue.toLowerCase();
+    return lowerCaseName.includes(lowerCaseQuery);
+  });
+}
+
 /* A quick filter that will return something based on a matching input */
-function filterList(list, query) {
+/*function filterList(list, query) {
   return list.filter((item) => {
     const lowerCaseName = item.name.toLowerCase();
     const lowerCaseQuery = query.toLowerCase();
     return lowerCaseName.includes(lowerCaseQuery);
   });
-}
+}*/
 
 function cutRestaurantList(list) {
   console.log("fired cut list");
@@ -95,9 +103,8 @@ async function mainEvent() {
 
   textField.addEventListener("input", (event) => {
     console.log("input", event.target.value);
-    const newList = filterList(currentList, event.target.value);
-    console.log(newList);
-    injectHTML(newList);
+    const newFilterList = filterList(currentList, event.target.value);
+    injectHTML(newFilterList);
   });
 }
 
