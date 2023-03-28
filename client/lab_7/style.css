@@ -84,6 +84,9 @@
     padding-bottom: 1.5rem;
     
   }
+  .hidden{
+    display: none;
+  }
   /*
     This rule implies that the H1 tag lives within another HTML tag
     It "inherits" some rules from the above
