@@ -26,15 +26,6 @@ function filterList(array, filterInputValue) {
   });
 }
 
-/* A quick filter that will return something based on a matching input */
-/*function filterList(list, query) {
-  return list.filter((item) => {
-    const lowerCaseName = item.name.toLowerCase();
-    const lowerCaseQuery = query.toLowerCase();
-    return lowerCaseName.includes(lowerCaseQuery);
-  });
-}*/
-
 function cutRestaurantList(list) {
   console.log("fired cut list");
   const range = [...Array(15).keys()];
@@ -46,8 +37,7 @@ function cutRestaurantList(list) {
 
 async function mainEvent() {
   // the async keyword means we can make API requests
-  const mainForm = document.querySelector(".main_form"); // This class name needs to be set on your form before you can listen for an event on it
-  const filterButton = document.querySelector("#filter_button");
+  const mainForm = document.querySelector(".main_form");
   const loadButton = document.querySelector("#data_load");
   const generateButton = document.querySelector("#generate");
   const textField = document.querySelector("#resto");
@@ -56,7 +46,12 @@ async function mainEvent() {
   loadAnimation.style.display = "none";
   generateButton.classList.add("hidden");
 
-  let storedList = [];
+  const storedData = localStorage.getItem("storedData");
+  const parsedData = JSON.parse(storedData);
+  if (parsedData.length > 0) {
+    generateButton.classList.remove("hidden");
+  }
+
   let currentList = []; // this is "scoped" to the main event function
 
   /* We need to listen to an "event" to have something happen in our page - here we're listening for a "submit" */
@@ -72,17 +67,14 @@ async function mainEvent() {
     );
 
     // This changes the response from the GET into data we can use - an "object"
-    storedList = await results.json();
-
-    if (storedList.length > 0) {
-      generateButton.classList.remove("hidden");
-    }
+    const storedList = await results.json();
+    localStorage.setItem("storedData", JSON.stringify(storedList));
     loadAnimation.style.display = "none";
-    console.table(storedList);
+    //console.table(storedList);
     //injectHTML(storedList);
   });
 
-  filterButton.addEventListener("click", (event) => {
+  /*filterButton.addEventListener("click", (event) => {
     console.log("clicked FilterButton");
     const formData = new FormData(mainForm);
     const formProps = Object.fromEntries(formData);
@@ -92,10 +84,12 @@ async function mainEvent() {
     injectHTML(newList);
 
     console.log(newList);
-  });
+  });*/
 
   generateButton.addEventListener("click", (event) => {
     console.log("generate new list");
+    const recallList = localStorage.getItem("storedData");
+    const storedList = JSON.parse(recallList);
     currentList = cutRestaurantList(storedList);
     console.log(currentList);
     injectHTML(currentList);
@@ -104,6 +98,7 @@ async function mainEvent() {
   textField.addEventListener("input", (event) => {
     console.log("input", event.target.value);
     const newFilterList = filterList(currentList, event.target.value);
+    console.log(newFilterList);
     injectHTML(newFilterList);
   });
 }
